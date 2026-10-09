@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 # from sklearn.datasets import load_boston
 import os 
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score,accuracy_score
 # bostonData = load_boston()
 # bostonData = pd.read_csv('data.csv')
 
@@ -28,10 +29,20 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 #train the Linear Regression model
 model = LinearRegression()
 model.fit(X_train, y_train)
-
+# Predict results on the test set
 predictResult = model.predict(X_test)
-# RMSE = np.sqrt(meansquareerror(ytest,ypredict))
-# print(predictResult,y_test)
-accuracy = accuracy_score(y_test,predictResult)
-# print(accuracy)
 
+# Calculate evaluation metrics
+mse = mean_squared_error(y_test, predictResult)
+rmse = mse ** 0.5 
+mae = mean_absolute_error(y_test, predictResult)
+r2 = r2_score(y_test, predictResult)
+print(X_test)
+# accuracy = accuracy_score(y_test,predictResult)
+
+# Print out the results so you can see them
+print(f"MSE: {mse}")
+print(f"RMSE: {rmse}")
+print(f"MAE: {mae}")
+print(f"R2 Score: {r2}")
+# print(accuracy)
